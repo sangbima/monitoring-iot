@@ -14,15 +14,27 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'csrfCookie' => [
+                'httpOnly' => true,
+                'secure' => true,
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'identityCookie' => [
+                'name' => '_identity-frontend',
+                'httpOnly' => true,
+                'secure' => true,
+            ],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
+            'cookieParams' => [
+                'httpOnly' => true,
+                'secure' => true,
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

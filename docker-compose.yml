@@ -10,6 +10,8 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
       - ./:/app
+      # Custom php.ini
+      - ./docker/php/php-custom.ini:/usr/local/etc/php/conf.d/php-custom.ini
 
   iot-backend:
     build: backend
@@ -20,6 +22,8 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
       - ./:/app
+      # Custom php.ini
+      - ./docker/php/php-custom.ini:/usr/local/etc/php/conf.d/php-custom.ini
 
   iot-api:
     build: api
@@ -30,6 +34,8 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
       - ./:/app
+      # Custom php.ini
+      - ./docker/php/php-custom.ini:/usr/local/etc/php/conf.d/php-custom.ini
 
   # Use Postgresql for DB
   db:
@@ -37,11 +43,12 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - pgsql-data:/var/lib/postgresql/data
+      - ./docker/postgresql/conf:/etc/postgresql/
+      - ./datadb:/var/lib/postgresql
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-
-volumes:
-  pgsql-data:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+# volumes:
+#   pgsql-data:
