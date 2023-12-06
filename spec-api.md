@@ -1,6 +1,21 @@
-Request:
+# SPEC API FOR Monitoring
 
-POST /api/register
+## Register Device
+
+> Register a new device to the monitoring system. This is typically done by an IoT agent, such as a smartphone app or a gateway device
+
+### Information
+
+| Path   | :   | /api/register |
+| ------ | --- | ------------- |
+| Method | :   | POST          |
+| Format | :   | JSON          |
+
+### HTTP Headers
+
+**Content-Type: application/json**
+
+### Request Body
 
 ```json
 {
@@ -8,17 +23,27 @@ POST /api/register
 }
 ```
 
-Response ("success"):
+| Field | Data Type | Mandatory |
+| ----- | :-------: | --------: |
+| sn    |  String   |       Yes |
+
+### Response Success
 
 ```json
 {
-  "status": "OK",
+  "status": "ok",
   "token": "xxxx",
   "expired": 3600
 }
 ```
 
-Response ("failed"):
+| Field   |  Type   | Description              |
+| ------- | :-----: | ------------------------ |
+| status  | String  | Status request           |
+| token   | String  | Token for authentication |
+| expired | Numeric | Token expired            |
+
+### Response Failed
 
 ```json
 {
@@ -26,32 +51,57 @@ Response ("failed"):
 }
 ```
 
-Request:
+## Send Data
 
-POST /api/collect
+> Send data monitoring to backend
+>
+> _Format of data field will be discussed later_
+
+### Information
+
+| Path   | :   | /api/send-data-monitoring |
+| ------ | --- | ------------------------- |
+| Method | :   | POST                      |
+| Format | :   | JSON                      |
+
+### HTTP Headers
+
+**Content-Type: application/json**
+
+### Request Body
 
 ```json
 {
-    "sn": "SNxxx12345",
-    "token": "xxxxx",
-    "data": {
-        "suhu": [50, 100],
-        "humidity": 90,
-        "speed": 100
-        "electrical": on
-    }
+  "sn": "SNxxx12345",
+  "token": "xxxxx",
+  "data": {
+    "temp": [50, 100],
+    "humidity": 90,
+    "speed": 100,
+    "electrical": on
+  }
 }
 ```
 
-Response ("success"):
+| Field | Data Type | Mandatory |
+| ----- | :-------: | --------- |
+| sn    |  String   | Yes       |
+| token |  String   | Yes       |
+| data  |  Object   | Yes       |
+
+### Response Success
 
 ```json
 {
-  "status": "OK"
+  "status": "ok"
 }
 ```
 
-Response ("failed"):
+| Field  |  Type  | Description    |
+| ------ | :----: | -------------- |
+| status | String | Status request |
+
+### Response Failed
 
 ```json
 {
