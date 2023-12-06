@@ -4,9 +4,9 @@ return [
     'components' => [
         'db' => [
             'class' => \yii\db\Connection::class,
-            'dsn' => 'pgsql:host=db;dbname=iot_db',
-            'username' => 'iotuser',
-            'password' => 'secret',
+            'dsn' => 'pgsql:host=db;dbname=db_name',
+            'username' => 'db_user',
+            'password' => 'db_password',
             'charset' => 'utf8',
         ],
         'mailer' => [
