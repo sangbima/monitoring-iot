@@ -39,9 +39,9 @@ services:
     volumes:
       - pgsql-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=iot_db
-      - POSTGRES_USER=iotuser
-      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
 volumes:
   pgsql-data:
