@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  iot-frontend:
+    build: frontend
+    ports:
+      - 20080:80
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/app
+
+  iot-backend:
+    build: backend
+    ports:
+      - 21080:80
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/app
+
+  iot-api:
+    build: api
+    ports:
+      - 22080:80
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/app
+
+  # Use Postgresql for DB
+  db:
+    image: postgres:16.1-alpine3.17
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgsql-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=iot_db
+      - POSTGRES_USER=iotuser
+      - POSTGRES_PASSWORD=secret
+
+volumes:
+  pgsql-data:
