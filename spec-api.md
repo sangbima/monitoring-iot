@@ -66,14 +66,16 @@
 
 ### HTTP Headers
 
-**Content-Type: application/json**
+|               |                  | Mandatory |
+| ------------- | ---------------- | :-------: |
+| Content-Type  | application/json |    Yes    |
+| Authorization | Bearer Token     |    Yes    |
 
 ### Request Body
 
 ```json
 {
   "sn": "SNxxx12345",
-  "token": "xxxxx",
   "data": {
     "temp": [50, 100],
     "humidity": 90,
