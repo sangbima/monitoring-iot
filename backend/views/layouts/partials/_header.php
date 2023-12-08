@@ -19,10 +19,10 @@ use yii\helpers\Html;
     <!-- App brand starts -->
     <div class="app-brand py-2 ms-3">
         <a href="index.html" class="d-sm-block d-none">
-            <img src="unify/assets/images/logo.svg" class="logo" alt="Bootstrap Gallery" />
+            <img src="/backend/images/logo.svg" class="logo" alt="Bootstrap Gallery" />
         </a>
         <a href="index.html" class="d-sm-none d-block">
-            <img src="unify/assets/images/logo-sm.svg" class="logo" alt="Bootstrap Gallery" />
+            <img src="/backend/images/logo-sm.svg" class="logo" alt="Bootstrap Gallery" />
         </a>
     </div>
     <!-- App brand ends -->
@@ -39,19 +39,19 @@ use yii\helpers\Html;
                     <!-- Row start -->
                     <div class="d-flex gap-2 m-2">
                         <a href="javascript:void(0)" class="g-col-4 p-2 border rounded-2">
-                            <img src="unify/assets/images/brand-behance.svg" class="img-3x" alt="Admin Themes" />
+                            <img src="/backend/images/brand-behance.svg" class="img-3x" alt="Admin Themes" />
                         </a>
                         <a href="javascript:void(0)" class="g-col-4 p-2 border rounded-2">
-                            <img src="unify/assets/images/brand-gatsby.svg" class="img-3x" alt="Admin Themes" />
+                            <img src="/backend/images/brand-gatsby.svg" class="img-3x" alt="Admin Themes" />
                         </a>
                         <a href="javascript:void(0)" class="g-col-4 p-2 border rounded-2">
-                            <img src="unify/assets/images/brand-google.svg" class="img-3x" alt="Admin Themes" />
+                            <img src="/backend/images/brand-google.svg" class="img-3x" alt="Admin Themes" />
                         </a>
                         <a href="javascript:void(0)" class="g-col-4 p-2 border rounded-2">
-                            <img src="unify/assets/images/brand-bitcoin.svg" class="img-3x" alt="Admin Themes" />
+                            <img src="/backend/images/brand-bitcoin.svg" class="img-3x" alt="Admin Themes" />
                         </a>
                         <a href="javascript:void(0)" class="g-col-4 p-2 border rounded-2">
-                            <img src="unify/assets/images/brand-dribbble.svg" class="img-3x" alt="Admin Themes" />
+                            <img src="/backend/images/brand-dribbble.svg" class="img-3x" alt="Admin Themes" />
                         </a>
                     </div>
                     <!-- Row end -->
@@ -173,7 +173,7 @@ use yii\helpers\Html;
                     <h5 class="fw-semibold px-3 py-2 text-primary">Messages</h5>
                     <div class="dropdown-item">
                         <div class="d-flex py-2 border-bottom">
-                            <img src="unify/assets/images/user3.png" class="img-3x me-3 rounded-5" alt="Admin Theme" />
+                            <img src="/backend/images/user3.png" class="img-3x me-3 rounded-5" alt="Admin Theme" />
                             <div class="m-0">
                                 <h6 class="mb-1 fw-semibold">Angelia Payne</h6>
                                 <p class="mb-1">
@@ -185,7 +185,7 @@ use yii\helpers\Html;
                     </div>
                     <div class="dropdown-item">
                         <div class="d-flex py-2 border-bottom">
-                            <img src="unify/assets/images/user1.png" class="img-3x me-3 rounded-5" alt="Admin Theme" />
+                            <img src="/backend/images/user1.png" class="img-3x me-3 rounded-5" alt="Admin Theme" />
                             <div class="m-0">
                                 <h6 class="mb-1 fw-semibold">Clyde Fowler</h6>
                                 <p class="mb-1">
@@ -197,7 +197,7 @@ use yii\helpers\Html;
                     </div>
                     <div class="dropdown-item">
                         <div class="d-flex py-2">
-                            <img src="unify/assets/images/user4.png" class="img-3x me-3 rounded-5" alt="Admin Theme" />
+                            <img src="/backend/images/user4.png" class="img-3x me-3 rounded-5" alt="Admin Theme" />
                             <div class="m-0">
                                 <h6 class="mb-1 fw-semibold">Sophie Michiels</h6>
                                 <p class="mb-1">
@@ -216,7 +216,7 @@ use yii\helpers\Html;
         <div class="dropdown ms-2">
             <a id="userSettings" class="dropdown-toggle d-flex py-2 align-items-center text-decoration-none" href="#!"
                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="unify/assets/images/user.png" class="rounded-2 img-3x" alt="Bootstrap Gallery" />
+                <img src="/backend/images/user.png" class="rounded-2 img-3x" alt="Bootstrap Gallery" />
                 <span class="ms-2 text-truncate d-lg-block d-none">Anne Santiago</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end shadow-lg">
@@ -228,11 +228,11 @@ use yii\helpers\Html;
                 <div class="mx-3 mt-2 d-grid">
                     <?php
                     echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-                        .Html::submitButton(
-                            'Logout ('.Yii::$app->user->identity->username.')',
+                        . Html::submitButton(
+                            'Logout (' . Yii::$app->user->identity->username . ')',
                             ['class' => 'btn btn-primary btn-sm']
                         )
-                        .Html::endForm();
+                        . Html::endForm();
                     ?>
                 </div>
             </div>

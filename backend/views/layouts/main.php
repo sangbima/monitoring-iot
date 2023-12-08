@@ -4,14 +4,16 @@
 /** @var string $content */
 
 // use backend\assets\AppAsset;
-use backend\assets\UnifyAsset;
+use backend\assets\BackendAsset;
+use backend\assets\PluginAsset;
 use common\widgets\Alert;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
-UnifyAsset::register($this);
+BackendAsset::register($this);
+PluginAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -32,16 +34,16 @@ UnifyAsset::register($this);
     <!-- Page wrapper start -->
     <div class="page-wrapper">
 
-        <?php require(__DIR__.'/partials/_header.php'); ?>
+        <?php require(__DIR__ . '/partials/_header.php'); ?>
 
         <!-- Main container start -->
         <div class="main-container">
-            <?php require(__DIR__.'/partials/_sidebar.php'); ?>
+            <?php require(__DIR__ . '/partials/_sidebar.php'); ?>
 
             <!-- App container starts -->
             <div class="app-container">
                 <?= $content ?>
-                <?php require(__DIR__.'/partials/_footer.php'); ?>
+                <?php require(__DIR__ . '/partials/_footer.php'); ?>
             </div>
             <!-- App container ends -->
 
