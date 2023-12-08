@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
-/** @var \common\models\LoginForm $model */
+/** @var \common\models\forms\LoginForm $model */
 
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
@@ -19,7 +19,7 @@ $this->title = 'Login';
             </a>
             <h5 class="fw-light mb-5">Sign in to access dashboard.</h5>
             <div class="mb-3">
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder' => 'Enter your email']) ?>
+                <?= $form->field($model, 'email')->textInput(['autofocus' => true, 'placeholder' => 'Enter your email']) ?>
             </div>
             <div class="mb-3">
                 <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Enter your password']) ?>

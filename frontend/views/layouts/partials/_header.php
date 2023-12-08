@@ -229,7 +229,7 @@ use yii\helpers\Html;
                     <?php
                     echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
                         . Html::submitButton(
-                            'Logout (' . Yii::$app->user->identity->username . ')',
+                            'Logout (' . Yii::$app->user->identity->fullname . ')',
                             ['class' => 'btn btn-primary btn-sm']
                         )
                         . Html::endForm();

@@ -226,10 +226,9 @@ use yii\helpers\Html;
                     <a class="dropdown-item" href="widgets.html"><i class="bi bi-box text-success"></i>Widgets</a>
                 </div>
                 <div class="mx-3 mt-2 d-grid">
-                    <?php
-                    echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
+                    <?= Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
                         . Html::submitButton(
-                            'Logout (' . Yii::$app->user->identity->username . ')',
+                            'Logout (' . Yii::$app->user->identity->fullname . ')',
                             ['class' => 'btn btn-primary btn-sm']
                         )
                         . Html::endForm();
