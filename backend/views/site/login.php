@@ -14,8 +14,7 @@ $this->title = 'Login';
     <div class="border rounded-2 p-4 mt-5">
         <div class="login-form">
             <a href="index.html" class="mb-4 d-flex">
-                <img src="/unify/assets/images/logo.svg" class="img-fluid login-logo"
-                    alt="IOT Monitoring Admin Dashboard" />
+                <img src="/backend/images/logo.svg" class="img-fluid login-logo" alt="IOT Monitoring Admin Dashboard" />
             </a>
             <h5 class="fw-light mb-5">Sign in to access dashboard.</h5>
             <div class="mb-3">
