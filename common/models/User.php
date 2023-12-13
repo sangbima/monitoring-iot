@@ -19,6 +19,7 @@ use yii\web\IdentityInterface;
  * @property string $fullname
  * @property string $auth_key
  * @property integer $status
+ * @property boolean $is_change_password 
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
@@ -57,6 +58,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['email', 'fullname'], 'string'],
             [['email', 'fullname'], 'required'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            ['is_change_password ', 'default', 'value' => false],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
     }
