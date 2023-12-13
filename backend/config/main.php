@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
+    'name' => 'Backend Sensorku',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
@@ -17,7 +18,6 @@ return [
             'csrfParam' => '_csrf-backend',
             'csrfCookie' => [
                 'httpOnly' => true,
-                'secure' => true,
             ]
         ],
         'user' => [
@@ -26,7 +26,6 @@ return [
             'identityCookie' => [
                 'name' => '_identity-backend',
                 'httpOnly' => true,
-                'secure' => true,
             ],
         ],
         'session' => [
@@ -34,7 +33,6 @@ return [
             'name' => 'advanced-backend',
             'cookieParams' => [
                 'httpOnly' => true,
-                'secure' => true,
             ],
         ],
         'log' => [

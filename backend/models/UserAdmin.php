@@ -17,6 +17,7 @@ use yii\web\IdentityInterface;
  * @property string $password_hash
  * @property string $verification_token
  * @property string|null $password_reset_token
+ * @property bool|null $is_change_password
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
@@ -51,15 +52,18 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'fullname', 'auth_key', 'password_hash', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'default', 'value' => null],
+            [['email', 'fullname', 'auth_key', 'password_hash'], 'required'],
+            [['auth_key', 'password_hash', 'created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             [['email'], 'string', 'max' => 150],
             [['fullname'], 'string', 'max' => 100],
             [['auth_key'], 'string', 'max' => 32],
+            [['is_change_password'], 'boolean'],
             [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
             [['email'], 'unique'],
+            [['email'], 'email'],
             [['password_reset_token'], 'unique'],
         ];
     }
@@ -77,6 +81,7 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
             'status' => 'Status',
+            'is_change_password' => 'User must change password when login',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -233,5 +238,25 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function getListStatusUser()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_DELETED => 'Deleted',
+            self::STATUS_INACTIVE => 'Inactive'
+        ];
+    }
+
+    public function getLabelStatusUser()
+    {
+        return 10;
+    }
+
+    public function softDelete()
+    {
+        $this->status = self::STATUS_DELETED;
+        return $this->save(false);
     }
 }
