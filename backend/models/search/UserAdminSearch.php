@@ -5,6 +5,7 @@ namespace backend\models\search;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\UserAdmin;
+use Yii;
 
 /**
  * UserAdminSearch represents the model behind the search form of `backend\models\UserAdmin`.
@@ -42,6 +43,7 @@ class UserAdminSearch extends UserAdmin
     public function search($params)
     {
         $query = UserAdmin::find();
+        $query->andWhere(['!=', 'id', Yii::$app->user->identity->id]);
 
         // add conditions that should always apply here
 

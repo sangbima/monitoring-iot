@@ -2,7 +2,8 @@
 
 /** @var yii\web\View $this */
 
-$this->title = Yii::$app->name;
+$this->title = 'Dashboard';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index">
     <!-- Row start -->

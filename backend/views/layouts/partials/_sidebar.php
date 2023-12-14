@@ -16,8 +16,8 @@ use yii\widgets\Menu;
     <div class="sidebarMenuScroll">
         <?php
         $menuItems = [
-            ['label' => '<i class="bi bi-pie-chart"></i><span class="menu-text">Dashboard</span>', 'url' => ['/site/index']],
-            ['label' => '<i class="bi bi-bar-chart-line"></i><span class="menu-text">Analytics</span>', 'url' => ['#']],
+            ['label' => '<i class="bi bi-speedometer"></i><span class="menu-text">Dashboard</span>', 'url' => ['/site/index']],
+            ['label' => '<i class="bi bi-person-circle"></i><span class="menu-text">Users</span>', 'url' => ['/user-admin/index']],
             ['label' => '<i class="bi bi-box"></i></i><span class="menu-text">Widgets</span>', 'url' => ['#']],
             ['label' => '<i class="bi bi-calendar2"></i><span class="menu-text">Calendar</span>', 'url' => ['#']],
             [

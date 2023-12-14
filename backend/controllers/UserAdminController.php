@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\UserAdmin;
 use backend\models\search\UserAdminSearch;
+use yii\base\UserException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -69,12 +70,14 @@ class UserAdminController extends Controller
     public function actionCreate()
     {
         $model = new UserAdmin();
+        $model->scenario = UserAdmin::SCENARIO_CREATE;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->setPassword($model->password_hash);
                 $model->generateAuthKey();
                 if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'User created');
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
@@ -98,10 +101,21 @@ class UserAdminController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if (!empty($model->password_hash)) {
+                $model->setPassword($model->password_hash);
+            } else {
+                $model->password_hash = (string) $model->getOldAttribute('password_hash');
+            }
+            $model->generateAuthKey();
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'User updated');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
         }
 
+        $model->password_hash = '';
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -117,7 +131,7 @@ class UserAdminController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->softDelete();
-
+        Yii::$app->session->setFlash('success', 'User deleted');
         return $this->redirect(['index']);
     }
 

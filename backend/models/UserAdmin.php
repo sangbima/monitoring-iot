@@ -27,7 +27,7 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
-
+    const SCENARIO_CREATE = 'create';
     /**
      * {@inheritdoc}
      */
@@ -46,13 +46,21 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
+    public function scenarios()
+    {
+        return array_merge(parent::scenarios(), [
+            self::SCENARIO_CREATE => ['password_hash', 'email', 'status', 'fullname', 'auth_key'],
+        ]);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['email', 'fullname', 'auth_key', 'password_hash'], 'required'],
+            [['email', 'fullname', 'auth_key'], 'required'],
+            [['auth_key', 'password_hash'], 'required', 'on' => self::SCENARIO_CREATE],
             [['auth_key', 'password_hash', 'created_at', 'updated_at'], 'safe'],
             [['created_at', 'updated_at'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
