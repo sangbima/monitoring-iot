@@ -79,7 +79,7 @@ class ClientController extends Controller
                 $model->role = User::ROLE_OWNER;
                 if ($model->save()) {
                     Yii::$app->session->setFlash('success', 'Client created');
-                    return $this->redirect(['view', 'uuid' => $model->uuid]);
+                    return $this->redirect(['view', 'id' => $model->uuid]);
                 }
             }
         } else {
@@ -111,7 +111,7 @@ class ClientController extends Controller
             $model->generateAuthKey();
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Client updated');
-                return $this->redirect(['view', 'uuid' => $model->uuid]);
+                return $this->redirect(['view', 'id' => $model->uuid]);
             }
 
         }
