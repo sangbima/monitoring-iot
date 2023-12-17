@@ -11,6 +11,7 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
 
 FrontendAsset::register($this);
 PluginAsset::register($this);
@@ -33,23 +34,48 @@ PluginAsset::register($this);
     <?php $this->beginBody() ?>
     <!-- Page wrapper start -->
     <div class="page-wrapper">
-
         <?php require(__DIR__ . '/partials/_header.php'); ?>
-
         <!-- Main container start -->
         <div class="main-container">
             <?php require(__DIR__ . '/partials/_sidebar.php'); ?>
-
             <!-- App container starts -->
             <div class="app-container">
-                <?= $content ?>
+                <div class="app-hero-header d-flex align-items-start">
+                    <?=
+                        Breadcrumbs::widget(
+                            [
+                                'encodeLabels' => false,
+                                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                                'homeLink' => [
+                                    'label' => '<i class="bi bi-house lh-1"></i> Home',
+                                    'url' => Url::to('/'),
+                                    'class' => 'text-decoration-none'
+                                ]
+                            ]
+                        ) ?>
+                    <!-- Sales stats start -->
+                    <div class="ms-auto d-lg-flex d-none flex-row">
+                        <div class="d-flex flex-row gap-2">
+                            <button class="btn btn-sm btn-primary">Today</button>
+                            <button class="btn btn-sm btn-white">7d</button>
+                            <button class="btn btn-sm btn-white">2w</button>
+                            <button class="btn btn-sm btn-white">1m</button>
+                            <button class="btn btn-sm btn-white">3m</button>
+                            <button class="btn btn-sm btn-white">6m</button>
+                            <button class="btn btn-sm btn-white">1y</button>
+                        </div>
+                    </div>
+                    <!-- Sales stats end -->
+                </div>
+                <div class="app-body">
+                    <?= Alert::widget() ?>
+                    <?= $content ?>
+                </div>
                 <?php require(__DIR__ . '/partials/_footer.php'); ?>
             </div>
             <!-- App container ends -->
-
         </div>
         <!-- Main container end -->
-
     </div>
     <?php $this->endBody() ?>
 </body>

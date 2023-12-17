@@ -23,8 +23,8 @@ use yii\widgets\Menu;
             'submenuTemplate' => "\n<ul class='treeview-menu'>\n{items}</ul>\n",
             'items' => [
                 ['label' => '<i class="bi bi-pie-chart"></i><span class="menu-text">Dashboard</span>', 'url' => ['/site/index']],
-                ['label' => '<i class="bi bi-bar-chart-line"></i><span class="menu-text">Analytics</span>', 'url' => ['#']],
-                ['label' => '<i class="bi bi-box"></i></i><span class="menu-text">Widgets</span>', 'url' => ['#']],
+                ['label' => '<i class="bi bi-person"></i><span class="menu-text">Users</span>', 'url' => ['/user/index']],
+                ['label' => '<i class="bi bi-pc-display"></i></i><span class="menu-text">Devices</span>', 'url' => ['/device/index']],
                 ['label' => '<i class="bi bi-calendar2"></i><span class="menu-text">Calendar</span>', 'url' => ['#']],
                 [
                     'label' => '<i class="bi bi-stickies"></i><span class="menu-text">Components</span>',

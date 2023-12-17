@@ -19,6 +19,7 @@ use yii\web\IdentityInterface;
  * @property string $fullname
  * @property string $auth_key
  * @property integer $status
+ * @property integer $parent_user_id
  * @property string $role
  * @property boolean $is_change_password 
  * @property integer $created_at
@@ -70,7 +71,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['email', 'fullname', 'auth_key'], 'required'],
             [['auth_key', 'password_hash'], 'required', 'on' => self::SCENARIO_CREATE],
             [['auth_key', 'password_hash', 'created_at', 'updated_at'], 'safe'],
-            [['created_at', 'updated_at'], 'integer'],
+            [['created_at', 'updated_at', 'parent_user_id'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['role', 'default', 'value' => self::ROLE_MEMBER],
             ['role', 'in', 'range' => [self::ROLE_MEMBER, self::ROLE_OWNER]],
@@ -100,6 +101,7 @@ class User extends ActiveRecord implements IdentityInterface
             'password_reset_token' => 'Password Reset Token',
             'status' => 'Status',
             'role' => 'Role',
+            'parent_user_id' => 'Parent',
             'is_change_password' => 'User must change password when login',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
