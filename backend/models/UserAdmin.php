@@ -6,11 +6,13 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
+use Ramsey\Uuid\Uuid;
 
 /**
  * This is the model class for table "user_admin".
  *
  * @property int $id
+ * @property string $uuid
  * @property string $email
  * @property string $fullname
  * @property string $auth_key
@@ -59,9 +61,10 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['uuid'], 'string', 'max' => 36],
             [['email', 'fullname', 'auth_key'], 'required'],
             [['auth_key', 'password_hash'], 'required', 'on' => self::SCENARIO_CREATE],
-            [['auth_key', 'password_hash', 'created_at', 'updated_at'], 'safe'],
+            [['auth_key', 'password_hash', 'created_at', 'updated_at', 'uuid'], 'safe'],
             [['created_at', 'updated_at'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
@@ -76,6 +79,16 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $uuid = Uuid::uuid7();
+            $this->uuid = $uuid;
+        }
+
+        return parent::beforeSave($insert);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -83,10 +96,11 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
+            'uuid' => 'UUID',
             'email' => 'Email',
             'fullname' => 'Fullname',
             'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
+            'password_hash' => 'Password',
             'password_reset_token' => 'Password Reset Token',
             'status' => 'Status',
             'is_change_password' => 'User must change password when login',

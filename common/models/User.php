@@ -7,11 +7,13 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use Ramsey\Uuid\Uuid;
 
 /**
  * User model
  *
  * @property integer $id
+ * @property string $uuid
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $verification_token
@@ -68,9 +70,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['uuid'], 'string', 'max' => 36],
             [['email', 'fullname', 'auth_key'], 'required'],
             [['auth_key', 'password_hash'], 'required', 'on' => self::SCENARIO_CREATE],
-            [['auth_key', 'password_hash', 'created_at', 'updated_at'], 'safe'],
+            [['auth_key', 'password_hash', 'created_at', 'updated_at', 'uuid'], 'safe'],
             [['created_at', 'updated_at', 'parent_user_id'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['role', 'default', 'value' => self::ROLE_MEMBER],
@@ -94,10 +97,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
+            'uuid' => 'UUID',
             'email' => 'Email',
             'fullname' => 'Fullname',
             'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
+            'password_hash' => 'Password',
             'password_reset_token' => 'Password Reset Token',
             'status' => 'Status',
             'role' => 'Role',
@@ -106,6 +110,16 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $uuid = Uuid::uuid7();
+            $this->uuid = $uuid;
+        }
+
+        return parent::beforeSave($insert);
     }
 
     /**

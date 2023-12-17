@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\UserAdmin $model */
+/** @var common\models\User $model */
 
 $this->title = $model->fullname;
-$this->params['breadcrumbs'][] = ['label' => 'User Admins', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Clients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -22,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="card-body" style="position: relative;">
                     <p>
-                        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                        <?= Html::a('Update', ['update', 'uuid' => $model->uuid], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Delete', ['delete', 'uuid' => $model->uuid], [
                             'class' => 'btn btn-danger',
                             'data' => [
                                 'confirm' => 'Are you sure you want to delete this item?',
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
-                            'id',
+                            'uuid',
                             'email:email',
                             'fullname',
                             'role',

@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var backend\models\UserAdmin $model */
+/** @var common\models\User $model */
 
-$this->title = 'Create User Admin';
-$this->params['breadcrumbs'][] = ['label' => 'User Admins', 'url' => ['index']];
+$this->title = 'Add Client';
+$this->params['breadcrumbs'][] = ['label' => 'Add Client', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-admin-create">

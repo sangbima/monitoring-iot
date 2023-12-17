@@ -51,14 +51,14 @@ class ClientController extends Controller
 
     /**
      * Displays a single UserAdmin model.
-     * @param int $id ID
+     * @param string $uuid UUID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($uuid)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($uuid),
         ]);
     }
 
@@ -79,7 +79,7 @@ class ClientController extends Controller
                 $model->role = User::ROLE_OWNER;
                 if ($model->save()) {
                     Yii::$app->session->setFlash('success', 'Client created');
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'uuid' => $model->uuid]);
                 }
             }
         } else {
@@ -92,15 +92,15 @@ class ClientController extends Controller
     }
 
     /**
-     * Updates an existing UserAdmin model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
+     * @param string $uuid UUID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($uuid)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($uuid);
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             if (!empty($model->password_hash)) {
@@ -111,7 +111,7 @@ class ClientController extends Controller
             $model->generateAuthKey();
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Client updated');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'uuid' => $model->uuid]);
             }
 
         }
@@ -123,29 +123,29 @@ class ClientController extends Controller
     }
 
     /**
-     * Deletes an existing UserAdmin model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
+     * @param string $uuid UUID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($uuid)
     {
-        $this->findModel($id)->softDelete();
+        $this->findModel($uuid)->softDelete();
         Yii::$app->session->setFlash('success', 'Client deleted');
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the UserAdmin model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
+     * @param string $uuid UUID
      * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($uuid)
     {
-        if (($model = User::findOne(['id' => $id])) !== null) {
+        if (($model = User::findOne(['uuid' => $uuid])) !== null) {
             return $model;
         }
 
