@@ -22,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="card-body" style="position: relative;">
                     <p>
-                        <?= Html::a('Update', ['update', 'uuid' => $model->uuid], ['class' => 'btn btn-primary']) ?>
-                        <?= Html::a('Delete', ['delete', 'uuid' => $model->uuid], [
+                        <?= Html::a('Update', ['update', 'id' => $model->uuid], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Delete', ['delete', 'id' => $model->uuid], [
                             'class' => 'btn btn-danger',
                             'data' => [
                                 'confirm' => 'Are you sure you want to delete this item?',

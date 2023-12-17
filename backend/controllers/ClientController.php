@@ -51,14 +51,14 @@ class ClientController extends Controller
 
     /**
      * Displays a single UserAdmin model.
-     * @param string $uuid UUID
+     * @param string $id UUID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($uuid)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($uuid),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -94,13 +94,13 @@ class ClientController extends Controller
     /**
      * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $uuid UUID
+     * @param string $id UUID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($uuid)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($uuid);
+        $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             if (!empty($model->password_hash)) {
@@ -125,13 +125,13 @@ class ClientController extends Controller
     /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $uuid UUID
+     * @param string $id UUID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($uuid)
+    public function actionDelete($id)
     {
-        $this->findModel($uuid)->softDelete();
+        $this->findModel($id)->softDelete();
         Yii::$app->session->setFlash('success', 'Client deleted');
         return $this->redirect(['index']);
     }
@@ -139,13 +139,13 @@ class ClientController extends Controller
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $uuid UUID
+     * @param string $id UUID
      * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($uuid)
+    protected function findModel($id)
     {
-        if (($model = User::findOne(['uuid' => $uuid])) !== null) {
+        if (($model = User::findOne(['uuid' => $id])) !== null) {
             return $model;
         }
 

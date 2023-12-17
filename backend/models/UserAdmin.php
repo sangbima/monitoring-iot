@@ -83,7 +83,7 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
     {
         if ($insert) {
             $uuid = Uuid::uuid7();
-            $this->uuid = $uuid;
+            $this->uuid = $uuid->toString();
         }
 
         return parent::beforeSave($insert);
