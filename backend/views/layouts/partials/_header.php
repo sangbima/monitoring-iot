@@ -217,7 +217,7 @@ use yii\helpers\Html;
             <a id="userSettings" class="dropdown-toggle d-flex py-2 align-items-center text-decoration-none" href="#!"
                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="/backend/images/user.png" class="rounded-2 img-3x" alt="Bootstrap Gallery" />
-                <span class="ms-2 text-truncate d-lg-block d-none">Anne Santiago</span>
+                <span class="ms-2 text-truncate d-lg-block d-none"><?= Yii::$app->user->identity->fullname ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-end shadow-lg">
                 <div class="header-action-links mx-3 gap-2">

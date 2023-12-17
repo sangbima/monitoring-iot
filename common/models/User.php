@@ -19,6 +19,7 @@ use yii\web\IdentityInterface;
  * @property string $fullname
  * @property string $auth_key
  * @property integer $status
+ * @property string $role
  * @property boolean $is_change_password 
  * @property integer $created_at
  * @property integer $updated_at
@@ -29,7 +30,10 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    const SCENARIO_CREATE = 'create';
 
+    const ROLE_OWNER = 'owner';
+    const ROLE_MEMBER = 'member';
 
     /**
      * {@inheritdoc}
@@ -49,17 +53,56 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+
+    public function scenarios()
+    {
+        return array_merge(parent::scenarios(), [
+            self::SCENARIO_CREATE => ['password_hash', 'email', 'status', 'fullname', 'auth_key'],
+        ]);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['email', 'fullname'], 'string'],
-            [['email', 'fullname'], 'required'],
+            [['email', 'fullname', 'auth_key'], 'required'],
+            [['auth_key', 'password_hash'], 'required', 'on' => self::SCENARIO_CREATE],
+            [['auth_key', 'password_hash', 'created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['is_change_password ', 'default', 'value' => false],
+            ['role', 'default', 'value' => self::ROLE_MEMBER],
+            ['role', 'in', 'range' => [self::ROLE_MEMBER, self::ROLE_OWNER]],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['email'], 'string', 'max' => 150],
+            [['fullname'], 'string', 'max' => 100],
+            [['auth_key'], 'string', 'max' => 32],
+            [['is_change_password'], 'boolean'],
+            [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
+            [['email'], 'unique'],
+            [['email'], 'email'],
+            [['password_reset_token'], 'unique'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'email' => 'Email',
+            'fullname' => 'Fullname',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'status' => 'Status',
+            'role' => 'Role',
+            'is_change_password' => 'User must change password when login',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
@@ -214,5 +257,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function softDelete()
+    {
+        $this->status = self::STATUS_DELETED;
+        return $this->save(false);
     }
 }
