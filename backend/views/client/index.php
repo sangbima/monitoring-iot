@@ -38,7 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             'email:email',
                             'fullname',
-                            'status',
+                            [
+                                'attribute' => 'status',
+                                'format' => 'html',
+                                'value' => function ($model) {
+                                                        return $model->labelStatusUser;
+                                                    }
+                            ],
                             [
                                 'class' => ActionColumn::class,
                                 'urlCreator' => function ($action, User $model, $key, $index, $column) {
