@@ -3,7 +3,7 @@
 namespace backend\models\forms;
 
 use Yii;
-use backend\models\UserAdmin;
+use common\models\UserAdmin;
 use common\models\forms\LoginForm;
 
 /**

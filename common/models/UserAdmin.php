@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\NotSupportedException;
@@ -23,6 +23,8 @@ use Ramsey\Uuid\Uuid;
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
+ * 
+ * @property Packages[] $packages
  */
 class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -107,6 +109,16 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * Gets query for [[Packages]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\query\PackagesQuery
+     */
+    public function getPackages()
+    {
+        return $this->hasMany(Packages::class, ['created_by' => 'id']);
     }
 
     /**

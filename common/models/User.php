@@ -27,6 +27,11 @@ use Ramsey\Uuid\Uuid;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * 
+ * @property SensorDevice[] $sensorDevicesByClient
+ * @property SensorDevice[] $sensorDevicesByUserCreated
+ * @property ServiceOrders[] $serviceOrders
+ * @property Services[] $services
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -110,6 +115,46 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * Gets query for [[SensorDevicesByClient]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\query\SensorDeviceQuery
+     */
+    public function getSensorDevicesByClient()
+    {
+        return $this->hasMany(SensorDevice::class, ['client_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[SensorDevicesByUserCreated]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\query\SensorDeviceQuery
+     */
+    public function getSensorDevicesByUserCreated()
+    {
+        return $this->hasMany(SensorDevice::class, ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[ServiceOrders]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\query\ServiceOrdersQuery
+     */
+    public function getServiceOrders()
+    {
+        return $this->hasMany(ServiceOrders::class, ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Services]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\query\ServicesQuery
+     */
+    public function getServices()
+    {
+        return $this->hasMany(Services::class, ['created_by' => 'id']);
     }
 
     public function beforeSave($insert)
@@ -300,5 +345,14 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         return $label;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \common\models\query\UserQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new \common\models\query\UserQuery(get_called_class());
     }
 }

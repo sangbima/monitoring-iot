@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\UserAdmin;
+use common\models\UserAdmin;
 use backend\models\search\UserAdminSearch;
 use yii\base\UserException;
 use yii\web\Controller;

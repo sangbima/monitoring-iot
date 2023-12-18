@@ -4,7 +4,7 @@ namespace backend\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\UserAdmin;
+use common\models\UserAdmin;
 use Yii;
 
 /**
