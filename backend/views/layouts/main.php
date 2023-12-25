@@ -5,16 +5,13 @@
 
 // use backend\assets\AppAsset;
 use backend\assets\BackendAsset;
-use backend\assets\PluginAsset;
-use common\widgets\Alert;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
 use yii\helpers\Url;
+use common\widgets\toastr\ToastrFlashMessage;
+use common\widgets\toastr\ToastrFlashMessageSession;
 
 BackendAsset::register($this);
-PluginAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -68,7 +65,13 @@ PluginAsset::register($this);
                     <!-- Sales stats end -->
                 </div>
                 <div class="app-body">
-                    <?= Alert::widget() ?>
+                    <?= ToastrFlashMessageSession::widget([
+                        'options' => [
+                            'closeButton' => true,
+                            'progressBar' => true,
+                            'positionClass' => ToastrFlashMessage::POSITION_TOP_FULL_WIDTH
+                        ]
+                    ]) ?>
                     <?= $content ?>
                 </div>
                 <?php require(__DIR__ . '/partials/_footer.php'); ?>

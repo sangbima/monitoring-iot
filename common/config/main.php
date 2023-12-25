@@ -7,6 +7,7 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'formatter' => [
+            'class' => 'common\i18n\Formatter',
             'datetimeFormat' => 'dd-MM-YYYY HH:mm:ss',
             'dateFormat' => 'dd-MM-YYYY',
             'decimalSeparator' => ',',

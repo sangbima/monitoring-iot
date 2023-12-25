@@ -38,20 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'email:email',
                             'fullname',
                             'role',
-                            [
-                                'attribute' => 'status',
-                                'format' => 'html',
-                                'value' => function ($model) {
-                                return $model->labelStatusUser;
-                            }
-                            ],
-                            [
-                                'attribute' => 'is_change_password',
-                                'format' => 'html',
-                                'value' => function ($model) {
-                                return $model->labelPasswordMustChange;
-                            }
-                            ],
+                            'status:statusLabel',
+                            'is_change_password:booleanLabel',
                             'created_at:datetime',
                             'updated_at:datetime'
                         ],

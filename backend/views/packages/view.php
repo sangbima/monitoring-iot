@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\UserAdmin $model */
+/** @var common\models\Packages $model */
 
-$this->title = $model->fullname;
-$this->params['breadcrumbs'][] = ['label' => 'User Admins', 'url' => ['index']];
+$this->title = $model->package_name;
+$this->params['breadcrumbs'][] = ['label' => 'Packages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="user-admin-view">
+<div class="packages-view">
     <div class="row gx-3">
         <div class="col-12">
             <div class="card mb-3">
@@ -31,16 +31,19 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]) ?>
                     </p>
+
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
                             'uuid',
-                            'email:email',
-                            'fullname',
-                            'status:statusLabel',
-                            'is_change_password:booleanLabel',
+                            'package_name',
+                            'sensor_count',
+                            'price:currency',
+                            'highlight:booleanLabel',
                             'created_at:datetime',
-                            'updated_at:datetime'
+                            'createdBy.fullname',
+                            'updated_at:datetime',
+                            'updatedBy.fullname',
                         ],
                     ]) ?>
                 </div>

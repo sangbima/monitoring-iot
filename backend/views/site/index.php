@@ -1,6 +1,10 @@
 <?php
 
+use backend\assets\PluginAsset;
+
 /** @var yii\web\View $this */
+
+PluginAsset::register($this);
 
 $this->title = 'Dashboard';
 $this->params['breadcrumbs'][] = $this->title;

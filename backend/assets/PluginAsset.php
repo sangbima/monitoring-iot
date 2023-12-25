@@ -12,7 +12,6 @@ class PluginAsset extends AssetBundle
     public $css = [];
     public $js = [
         'vendor/overlay-scroll/custom-scrollbar.js',
-        'vendor/toastify/custom.js',
         'vendor/apex/custom/dash1/visitors.js',
         'vendor/apex/custom/dash1/sales.js',
         'vendor/apex/custom/dash1/sparkline.js',
@@ -25,7 +24,6 @@ class PluginAsset extends AssetBundle
         'yii\bootstrap5\BootstrapAsset',
         'common\assets\UnifyAsset',
         'common\assets\OverlayScrollbarsAsset',
-        'common\assets\ToastifyAsset',
         'common\assets\ApexchartsAsset',
         'common\assets\MomentAsset',
     ];

@@ -335,27 +335,6 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function getLabelStatusUser()
-    {
-        $statusLabel = [
-            self::STATUS_ACTIVE => '<span class="badge bg-success">Active</span>',
-            self::STATUS_INACTIVE => '<span class="badge bg-warning">Inactive</span>',
-            self::STATUS_DELETED => '<span class="badge bg-danger">Deleted</span>',
-        ];
-
-        return $statusLabel[$this->status];
-    }
-
-    public function getLabelPasswordMustChange()
-    {
-        $label = '<span class="badge bg-info">No</span>';
-        if ($this->is_change_password) {
-            $label = '<span class="badge bg-success">Yes</span>';
-        }
-
-        return $label;
-    }
-
     /**
      * {@inheritdoc}
      * @return \common\models\query\UserQuery the active query used by this AR class.

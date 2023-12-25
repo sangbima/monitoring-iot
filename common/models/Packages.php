@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use Ramsey\Uuid\Uuid;
 
 /**
  * This is the model class for table "packages".
@@ -35,12 +38,25 @@ class Packages extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+            BlameableBehavior::class
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['uuid', 'package_name', 'sensor_count', 'price'], 'required'],
+            [['uuid', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'safe'],
+            [['package_name', 'sensor_count', 'price'], 'required'],
             [['sensor_count', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'default', 'value' => null],
-            [['sensor_count', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
+            [['created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
+            [['sensor_count'], 'integer', 'min' => 1],
             [['price'], 'number'],
             [['highlight'], 'boolean'],
             [['uuid'], 'string', 'max' => 36],
@@ -61,13 +77,23 @@ class Packages extends \yii\db\ActiveRecord
             'uuid' => 'Uuid',
             'package_name' => 'Package Name',
             'sensor_count' => 'Sensor Count',
-            'price' => 'Price',
+            'price' => 'Price (Rp)',
             'highlight' => 'Highlight',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $uuid = Uuid::uuid7();
+            $this->uuid = $uuid->toString();
+        }
+
+        return parent::beforeSave($insert);
     }
 
     /**

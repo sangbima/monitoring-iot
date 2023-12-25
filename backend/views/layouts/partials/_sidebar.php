@@ -19,7 +19,7 @@ use yii\widgets\Menu;
             ['label' => '<i class="bi bi-speedometer"></i><span class="menu-text">Dashboard</span>', 'url' => ['/site/index']],
             ['label' => '<i class="bi bi-box"></i></i><span class="menu-text">Clients</span>', 'url' => ['/client/index']],
             ['label' => '<i class="bi bi-person-circle"></i><span class="menu-text">Users Admin</span>', 'url' => ['/user-admin/index']],
-            ['label' => '<i class="bi bi-calendar2"></i><span class="menu-text">Calendar</span>', 'url' => ['#']],
+            ['label' => '<i class="bi bi-boxes"></i><span class="menu-text">Packages</span>', 'url' => ['/packages/index']],
             [
                 'label' => '<i class="bi bi-stickies"></i><span class="menu-text">Components</span>',
                 'url' => ['#!'],

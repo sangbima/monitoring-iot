@@ -288,25 +288,4 @@ class UserAdmin extends \yii\db\ActiveRecord implements IdentityInterface
         $this->status = self::STATUS_DELETED;
         return $this->save(false);
     }
-
-    public function getLabelStatusUser()
-    {
-        $statusLabel = [
-            self::STATUS_ACTIVE => '<span class="badge bg-success">Active</span>',
-            self::STATUS_INACTIVE => '<span class="badge bg-warning">Inactive</span>',
-            self::STATUS_DELETED => '<span class="badge bg-danger">Deleted</span>',
-        ];
-
-        return $statusLabel[$this->status];
-    }
-
-    public function getLabelPasswordMustChange()
-    {
-        $label = '<span class="badge bg-info">No</span>';
-        if ($this->is_change_password) {
-            $label = '<span class="badge bg-success">Yes</span>';
-        }
-
-        return $label;
-    }
 }
