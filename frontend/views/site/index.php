@@ -1,9 +1,12 @@
 <?php
+use frontend\assets\PluginAsset;
 
 /** @var yii\web\View $this */
 
 $this->title = 'Dashboard';
 $this->params['breadcrumbs'][] = $this->title;
+
+PluginAsset::register($this);
 ?>
 <div class="site-index">
     <!-- Row start -->

@@ -326,6 +326,15 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->save(false);
     }
 
+    public static function getListStatusUser()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_DELETED => 'Deleted',
+            self::STATUS_INACTIVE => 'Inactive'
+        ];
+    }
+
     public function getLabelStatusUser()
     {
         $statusLabel = [

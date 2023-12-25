@@ -1,13 +1,13 @@
 <?php
 
-use backend\models\UserAdmin;
+use common\models\User;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 use kartik\select2\Select2;
 use kartik\widgets\SwitchInput;
 
 /** @var yii\web\View $this */
-/** @var backend\models\UserAdmin $model */
+/** @var common\models\UserAdmin $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -24,7 +24,7 @@ use kartik\widgets\SwitchInput;
     </div>
     <div class="mb-3">
         <?= $form->field($model, 'status')->widget(Select2::class, [
-            'data' => UserAdmin::getListStatusUser(),
+            'data' => User::getListStatusUser(),
             'options' => ['placeholder' => 'Status ...'],
             'hideSearch' => true,
         ]) ?>
