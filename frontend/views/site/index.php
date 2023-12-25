@@ -225,7 +225,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="event-list mt-3">
                         <div class="d-flex align-items-center mb-4">
-                            <img src="/backend/images/checked.svg" alt="Bootstrap Gallery" class="img-2x" />
+                            <img src="/frontend/images/checked.svg" alt="Bootstrap Gallery" class="img-2x" />
                             <div class="ms-3">
                                 <h6 class="text-primary mb-1 fw-bold">11:30AM</h6>
                                 <h6 class="m-0 text-secondary fw-normal">
@@ -234,7 +234,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                         </div>
                         <div class="d-flex align-items-center mb-4">
-                            <img src="/backend/images/checked.svg" alt="Bootstrap Gallery" class="img-2x" />
+                            <img src="/frontend/images/checked.svg" alt="Bootstrap Gallery" class="img-2x" />
                             <div class="ms-3">
                                 <h6 class="text-primary mb-1 fw-bold">2:30PM</h6>
                                 <h6 class="m-0 text-secondary fw-normal">
@@ -243,7 +243,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <img src="/backend/images/not-checked.svg" alt="Bootstrap Gallery" class="img-2x" />
+                            <img src="/frontend/images/not-checked.svg" alt="Bootstrap Gallery" class="img-2x" />
                             <div class="ms-3">
                                 <h6 class="text-primary mb-1 fw-bold">03:30PM</h6>
                                 <h6 class="m-0 text-secondary fw-normal">
