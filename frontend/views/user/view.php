@@ -37,21 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'uuid',
                             'email:email',
                             'fullname',
-                            [
-                                'attribute' => 'status',
-                                'format' => 'html',
-                                'value' => function ($model) {
-                                return $model->labelStatusUser;
-                            }
-                            ],
+                            'status:statusLabel',
                             'role',
-                            [
-                                'attribute' => 'is_change_password',
-                                'format' => 'html',
-                                'value' => function ($model) {
-                                return $model->labelPasswordMustChange;
-                            }
-                            ],
+                            'is_change_password:booleanLabel',
                             'created_at:datetime',
                             'updated_at:datetime'
                         ],
